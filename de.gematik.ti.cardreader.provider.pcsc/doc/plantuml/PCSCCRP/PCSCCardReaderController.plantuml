@@ -1,0 +1,29 @@
+@startuml
+
+  package de.gematik.ti.cardreader.provider.pcsc.control {
+    class PcScCardReaderController {
+        {static} - LOGGER : Logger
+        {static} - instance : PcScCardReaderController
+        - Readers : Collection<ICardReader>
+        - PcScCardReaderController()
+        {static} + getInstance()
+        + getCardReaders()
+        - findAvailableCardReaders()
+        - listCardReaders()
+    }
+  }
+
+
+  package de.gematik.ti.cardreader.provider.pcsc.control {
+    class CheckReaders {
+        ~ CheckReaders()
+        + run()
+        - findNewAndInform()
+        - findRemovedAndInform()
+    }
+  }
+
+
+  PcScCardReaderController +-down- CheckReaders
+
+@enduml

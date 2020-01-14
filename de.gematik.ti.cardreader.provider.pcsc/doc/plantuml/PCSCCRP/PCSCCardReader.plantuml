@@ -1,0 +1,23 @@
+@startuml
+
+  package de.gematik.ti.cardreader.provider.pcsc.entities {
+    class CardReader {
+        - cardTerminal : CardTerminal
+        + CardReader()
+        + initialize()
+        + isInitialized()
+        + connect()
+        + connect()
+        + getName()
+        + isCardPresent()
+        + waitForCardAbsent()
+        + waitForCardPresent()
+        + toString()
+    }
+  }
+  
+
+  CardReader -up-|> ICardReader
+
+
+@enduml

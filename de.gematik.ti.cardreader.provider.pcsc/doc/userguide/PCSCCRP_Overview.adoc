@@ -1,0 +1,108 @@
+include::config.adoc[]
+
+== Overview
+
+ifndef::useCachePlantuml[]
+
+.PcscCardReaderProvider
+[plantuml,PCSCCRP/generated/overview,png,caption="{classdia-caption} {counter:class}: ",650]
+----
+include::{plantumldir}/PCSCCRP/overview.plantuml[]
+----
+
+endif::useCachePlantuml[]
+ifdef::useCachePlantuml[]
+
+.PcscCardReaderProvider
+image::PCSCCRP/generated/overview.png[caption="{classdia-caption} {counter:class}: "]
+
+{empty} +
+
+endif::useCachePlantuml[]
+
+=== Integration
+
+The PCSC CardReaderProvider needs a descriptor behind `YOUR.PROVIDER\src\main\resources\META-INF\services` with filename
+`de.gematik.ti.cardreader.provider.spi.ICardReaderControllerProvider` and the content of the package and class which implements the service provider interface
+`dde.gematik.ti.cardreader.provider.pcsc.control.CardReaderProvider`.
+
+== Hardware
+
+Each card reader device which communicates over pcsc protocol
+
+== Control
+
+=== PCSCCardReaderProvider
+
+// tag::PCSCCardReaderProvider[]
+
+The PCSCCardReaderProvider class needs implementation of the interface 'ICardReaderControllerProvider' to handle listener and provide methods to inform connected listeners about card reader changes.
+ifndef::useCachePlantuml[]
+
+.PCSCCardReaderProvider
+[plantuml,PCSCCRP/generated/PCSCCardReaderProvider,png,caption="{classdia-caption} {counter:class}: ",300]
+----
+include::{plantumldir}/PCSCCRP/PCSCCardReaderProvider.plantuml[]
+----
+
+endif::useCachePlantuml[]
+ifdef::useCachePlantuml[]
+
+.PCSCCardReaderProvider
+image::PCSCCRP/generated/PCSCCardReaderProvider.png[caption="{classdia-caption} {counter:class}: "]
+
+{empty} +
+
+endif::useCachePlantuml[]
+// end::PCSCCardReaderProvider[]
+
+=== PCSCCardReaderController
+
+// tag::PCSCCardReaderController[]
+
+The PCSCCardReaderController class extends the abstract class 'AbstractCardReaderController' to handle necessary permissions and checking if the application context is set.
+Returns a list with currently connected pcsc cardReaders and informs about reader connection and disconnection.
+ifndef::useCachePlantuml[]
+
+.PCSCCardReaderController
+[plantuml,PCSCCRP/generated/PCSCCardReaderController,png,caption="{classdia-caption} {counter:class}: ",300]
+----
+include::{plantumldir}/PCSCCRP/PCSCCardReaderController.plantuml[]
+----
+
+endif::useCachePlantuml[]
+ifdef::useCachePlantuml[]
+
+.PCSCCardReaderController
+image::PCSCCRP/generated/PCSCCardReaderController.png[caption="{classdia-caption} {counter:class}: "]
+
+{empty} +
+
+endif::useCachePlantuml[]
+// end::PCSCCardReaderController[]
+
+== Entities
+
+=== CardReader
+
+// tag::PCSCCardReader[]
+
+The CardReader represent a pcsc card reader with one slot.
+ifndef::useCachePlantuml[]
+
+.CardReader
+[plantuml,PCSCCRP/generated/PCSCCardReader,png,caption="{classdia-caption} {counter:class}: ",300]
+----
+include::{plantumldir}/PCSCCRP/PCSCCardReader.plantuml[]
+----
+
+endif::useCachePlantuml[]
+ifdef::useCachePlantuml[]
+
+.CardReader
+image::PCSCCRP/generated/PCSCCardReader.png[caption="{classdia-caption} {counter:class}: "]
+
+{empty} +
+
+endif::useCachePlantuml[]
+// end::PCSCCardReader[]

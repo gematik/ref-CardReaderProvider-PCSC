@@ -1,0 +1,14 @@
+@startuml
+
+  package de.gematik.ti.cardreader.provider.pcsc.control {
+    class CardReaderProvider {
+        - providerDescriptor : ProviderDescriptor
+        + CardReaderProvider()
+        + getCardReaderController()
+        + getDescriptor()
+    }
+  }
+
+  CardReaderProvider -up-|> ICardReaderControllerProvider
+
+@enduml

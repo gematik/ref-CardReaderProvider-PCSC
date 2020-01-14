@@ -1,0 +1,74 @@
+@startuml
+
+
+
+  namespace de.gematik.ti.cardreader.provider.pcsc.control {
+    class de.gematik.ti.cardreader.provider.pcsc.control.CardReaderCardChecker {
+        {static} - LOGGER : Logger
+        {static} - WAIT_FOR_CARD_EVENT : int
+        - active : boolean
+        - cardReaderController : AbstractCardReaderController
+        - physicalReaderAvailable : boolean
+        + CardReaderCardChecker()
+        + isActive()
+        + run()
+        {static} + startNewInstance()
+        + stopChecker()
+        # sendCardMessageForState()
+        - doCheckCards()
+    }
+  }
+  
+
+  namespace de.gematik.ti.cardreader.provider.pcsc.control {
+    class de.gematik.ti.cardreader.provider.pcsc.control.CardReaderProvider {
+        - providerDescriptor : ProviderDescriptor
+        + CardReaderProvider()
+        + getCardReaderController()
+        + getDescriptor()
+    }
+  }
+  
+
+  namespace de.gematik.ti.cardreader.provider.pcsc.control {
+    class de.gematik.ti.cardreader.provider.pcsc.control.PcScCardReaderController {
+        {static} - LOGGER : Logger
+        {static} - instance : PcScCardReaderController
+        - readers : Collection<ICardReader>
+        + getCardReaders()
+        {static} + getInstance()
+        - PcScCardReaderController()
+        - findAvailableCardReaders()
+        - listCardReaders()
+    }
+  }
+  
+
+  namespace de.gematik.ti.cardreader.provider.pcsc.control {
+    class de.gematik.ti.cardreader.provider.pcsc.control.PcScCardReaderController.CheckReaders {
+        {static} - SLEEP_BETWEEN_READERS_CHECK : int
+        - cardCheckerMap : Map<CardReader, CardReaderCardChecker>
+        + run()
+        ~ CheckReaders()
+        - createNewChecker()
+        - findNewAndInform()
+        - findRemovedAndInform()
+        - stopChecker()
+    }
+  }
+  
+
+  de.gematik.ti.cardreader.provider.pcsc.control.CardReaderCardChecker o-- de.gematik.ti.cardreader.provider.pcsc.entities.CardReader : cardReader
+  de.gematik.ti.cardreader.provider.pcsc.control.CardReaderProvider .up.|> de.gematik.ti.cardreader.provider.spi.ICardReaderControllerProvider
+  de.gematik.ti.cardreader.provider.pcsc.control.PcScCardReaderController -up-|> de.gematik.ti.cardreader.provider.api.AbstractCardReaderController
+  de.gematik.ti.cardreader.provider.pcsc.control.PcScCardReaderController +-down- de.gematik.ti.cardreader.provider.pcsc.control.PcScCardReaderController.CheckReaders
+
+
+
+
+
+
+
+
+
+@enduml
